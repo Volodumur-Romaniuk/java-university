@@ -1,0 +1,24 @@
+{
+  "drugs": [
+    {
+      "id": "32b1f8b9-f536-4d4b-9e7e-7af1ba39e398",
+      "name": "Vaccine",
+      "manufacturer": "Pfizer",
+      "price": 9.99
+    },
+    {
+      "id": "56d92fdd-fe52-4cad-b988-d01cb2f1fa6c",
+      "name": "Vaccine",
+      "manufacturer": "Pfizer",
+      "price": 8.99
+    }
+  ],
+  "seller": {
+    "name": "Sam",
+    "surname": "Samovuch",
+    "birthday": "2022-11-04",
+    "sex": "MALE",
+    "salary": 0.0,
+    "position": "DURECTOR"
+  }
+}

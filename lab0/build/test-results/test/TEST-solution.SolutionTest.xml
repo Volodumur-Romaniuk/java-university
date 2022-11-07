@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="solution.SolutionTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-09-19T05:36:50" hostname="MacBook-Air-Vova.local" time="0.061">
+  <properties/>
+  <testcase name="getSol1()" classname="solution.SolutionTest" time="0.038"/>
+  <testcase name="getSol2()" classname="solution.SolutionTest" time="0.004"/>
+  <testcase name="getSol3()" classname="solution.SolutionTest" time="0.001"/>
+  <testcase name="getSol4()" classname="solution.SolutionTest" time="0.001"/>
+  <testcase name="getSol5()" classname="solution.SolutionTest" time="0.002"/>
+  <testcase name="getSol6()" classname="solution.SolutionTest" time="0.001"/>
+  <testcase name="getSol7()" classname="solution.SolutionTest" time="0.002"/>
+  <testcase name="getSol8()" classname="solution.SolutionTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
