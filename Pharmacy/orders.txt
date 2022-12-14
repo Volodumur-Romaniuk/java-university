@@ -1,0 +1,13 @@
+[Order{id=f10a52ab-4d99-46d6-8802-32f002b37ab0, drugs=[Drug{id='null', name='AAAAAa', manufacturer='Pfizer', price=8.99}, Drug{id='null', name='Vaccine', manufacturer='Pfizer', price=9.99}], seller=Seller{name=null
+surname=null
+birthday=2022-12-14
+sex=null
+salary=2.0
+position=DURECTOR
+}, totalPrice=18.98}, Order{id=f10a52ab-4d99-46d6-8802-32f002b37ab0, drugs=[Drug{id='null', name='AAAAAa', manufacturer='Pfizer', price=8.99}, Drug{id='null', name='Vaccine', manufacturer='Pfizer', price=9.99}], seller=Seller{name=null
+surname=null
+birthday=2022-12-14
+sex=null
+salary=2.0
+position=DURECTOR
+}, totalPrice=18.98}]

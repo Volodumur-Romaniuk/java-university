@@ -15,7 +15,10 @@ import java.util.UUID;
 public class CRUDDrugs {
     private static final String DRUG_TABLE = "Drugs";
    private static final String GET_ALL = "SELECT * FROM " + DRUG_TABLE;
-        public List<Drug> getAll(){
+    private static final String GET_ALL_ASCEND = "SELECT * FROM " + DRUG_TABLE + " ORDER BY PRICE ASC";
+    private static final String GET_ALL_DESCEND = "SELECT * FROM " + DRUG_TABLE + " ORDER BY PRICE DESC";
+
+    public List<Drug> getAll(){
             var drugList = new ArrayList<Drug>();
             try(Connection connection = Connector.getConnection()){
                 Statement statement = connection.createStatement();
@@ -34,6 +37,68 @@ public class CRUDDrugs {
             }
             return drugList;
         }
+
+    public List<Drug> getAllAscend(){
+        var drugList = new ArrayList<Drug>();
+        try(Connection connection = Connector.getConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(GET_ALL_ASCEND);
+            while(rs.next()){
+                var drug = new Drug.DrugBuilder()
+                        .id((rs.getString("id")))
+                        .name(rs.getString("name"))
+                        .manufacturer(rs.getString("manufacter"))
+                        .price(Double.parseDouble(rs.getString("price")))
+                        .build();
+                drugList.add(drug);
+            }
+        } catch (SQLException | ValidationException e){
+            e.printStackTrace();
+        }
+        return drugList;
+    }
+    public List<Drug> getAllDescend(){
+
+        var drugList = new ArrayList<Drug>();
+        try(Connection connection = Connector.getConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(GET_ALL_DESCEND);
+            while(rs.next()){
+                var drug = new Drug.DrugBuilder()
+                        .id((rs.getString("id")))
+                        .name(rs.getString("name"))
+                        .manufacturer(rs.getString("manufacter"))
+                        .price(Double.parseDouble(rs.getString("price")))
+                        .build();
+                drugList.add(drug);
+            }
+        } catch (SQLException | ValidationException e){
+            e.printStackTrace();
+        }
+        return drugList;
+    }
+    public List<Drug> searchDrug(String searchName){
+        String SEARCH_QUERY = "SELECT * FROM "+ DRUG_TABLE + " WHERE "+ "name" +" like '%" + searchName + "%'";
+
+        var drugList = new ArrayList<Drug>();
+        try(Connection connection = Connector.getConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(SEARCH_QUERY);
+            System.out.println(SEARCH_QUERY);
+            while(rs.next()){
+                var drug = new Drug.DrugBuilder()
+                        .id((rs.getString("id")))
+                        .name(rs.getString("name"))
+                        .manufacturer(rs.getString("manufacter"))
+                        .price(Double.parseDouble(rs.getString("price")))
+                        .build();
+                drugList.add(drug);
+            }
+        } catch (SQLException | ValidationException e){
+            e.printStackTrace();
+        }
+        return drugList;
+    }
     public Drug insertDrug(Drug drug){
         var id = UUID.randomUUID();
         String ADD_NEW_DRUG = "INSERT INTO Drugs (id, name, manufacter, price) " +"values(?,?,?,?)";

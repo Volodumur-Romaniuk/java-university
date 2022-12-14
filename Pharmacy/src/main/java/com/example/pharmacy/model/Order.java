@@ -1,13 +1,12 @@
 package com.example.pharmacy.model;
 
+
 import jakarta.validation.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Order implements Serializable {
     private String id = UUID.randomUUID().toString();
@@ -66,6 +65,9 @@ public class Order implements Serializable {
                 ", totalPrice=" + totalPrice  +
                 '}';
     }
+
+
+
 
     public static class OrderBuilder {
         private List<Drug> drugs;
