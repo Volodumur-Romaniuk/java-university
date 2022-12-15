@@ -9,6 +9,7 @@ import com.example.pharmacy.model.Seller;
 import com.example.pharmacy.serialize.TXTOrderSerialize;
 import com.example.pharmacy.serialize.XMLOrderSerialize;
 import com.example.pharmacy.service.DrugsServices;
+import com.example.pharmacy.service.DrugsStreamServices;
 import com.example.pharmacy.service.SortByName;
 
 import java.io.IOException;
@@ -27,11 +28,13 @@ public abstract class Main {
         var drugs = new ArrayList<Drug>();
         drugs.add(drug1);
         drugs.add(drug2);
+        drugs.add(drug2);
+        drugs.add(drug2);
 
-        System.out.println(drugs);
+
         Collections.sort(drugs);
 
-        System.out.println(drugs);
+
 
         SortByName sortByName = new SortByName();
         Collections.sort(drugs,sortByName);
@@ -46,29 +49,12 @@ public abstract class Main {
             add(order1);
         }};
 
-        XMLOrderSerialize objXml = new XMLOrderSerialize();
-//        objXml.writeObject("order.xml", order1);
-//        objXml.writeListObject("orders.xml", orderList);
-//        System.out.println("read data with orders.xml "+"\n" +objXml.readListObject("orders.xml"));
-//        JSONOrderSerialize objJson = new JSONOrderSerialize();
-//        objJson.writeListObject("orders.json", orderList);
-//        System.out.println("\n");
-//        System.out.println("\n");
-//        System.out.println("read data with order.json " + objJson.readObject("order.json"));
-//        System.out.println("\n");
-//        System.out.println("\n");
-//        System.out.println("read data with orders.json " + objJson.readListObject("orders.json"));
+        var drugService = new DrugsServices();
 
-        TXTOrderSerialize objTxt = new TXTOrderSerialize();
-        objTxt.writeObject("order.txt",order1);
-        objTxt.writeListObject("orders.txt",orderList);
-        DrugsServices filterName = new DrugsServices();
-        var res = filterName.findByName(drugs,"a");
-        System.out.println(res);
-        var crudDrugs = new CRUDDrugs();
-        Drug drug = new Drug("Ibuprofen","Farmak",5.0);
-        crudDrugs.insertDrug(drug) ;
-        System.out.println("getAll" + crudDrugs.getAll());
+        System.out.println( drugService.searchByName(drugs,"A"));
+        System.out.println("Ascend"+drugService.sortDrugAscend(drugs));
+        System.out.println("Descend"+drugService.sortDrugDescend(drugs));
+
     }
 }
 

@@ -24,7 +24,7 @@ public class DrugServlet extends HttpServlet {
 
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest req, javax.servlet.http.HttpServletResponse response) throws ServletException, IOException {
-        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3001");
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         String jsonData = gson.toJson(crudDrug.getAll());

@@ -2,22 +2,29 @@ package com.example.pharmacy.service;
 
 import com.example.pharmacy.model.Drug;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DrugsServices {
-    public List<Drug> findByName(List<Drug> drugList, String name){
-        var result =  drugList.stream().filter(x -> x.getName().contains(name)).toList();
-        return result;
+    public List<Drug> searchByName(List<Drug> drugs, String name){
+        var resList = new ArrayList<Drug>();
+        var searchText = name.trim();
+        for (var drug: drugs) {
+            if(drug.getName().contains(searchText) ){
+                resList.add(drug);
+            }
+        }
+        return resList;
     }
-    public List<Drug> sortByAscend(List<Drug> drugList){
-        var result =  drugList.stream().sorted().collect(Collectors.toList());
-        return result;
+    public List<Drug> sortDrugAscend(List<Drug> drugs) {
+          Collections.sort(drugs, new SortByName());
+          return drugs;
     }
-    public List<Drug> sortByDescend(List<Drug> drugList){
-        var result =  drugList.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
-        return result;
+    public List<Drug> sortDrugDescend(List<Drug> drugs) {
+        Collections.sort(drugs, new SortByName());
+        Collections.reverse(drugs);
+        return drugs;
     }
 
 }
