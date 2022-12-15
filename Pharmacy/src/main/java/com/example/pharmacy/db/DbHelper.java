@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DbHelper {
-    private final static String CREATE_DRUGS_TABLE = "name varchar(40) not null, manufacter varchar(40), price double";
-    private final static String CREATE_ORDER_TABLE = "idSeller string";
+    private final static String DRUG_DETAILS = "name varchar(40) not null, manufacter varchar(40), price double";
+
 
     private static void createTable(String tableName, String createTableDetails){
         try (Connection conn = Connector.getConnection();
@@ -20,8 +20,7 @@ public class DbHelper {
     }
 
     public static void createAllTables(){
-        createTable("Drugs", CREATE_DRUGS_TABLE);
-        createTable("Order", CREATE_ORDER_TABLE);
+        createTable("Drugs", DRUG_DETAILS);
     }
 
     private static void deleteTable(String tableName){

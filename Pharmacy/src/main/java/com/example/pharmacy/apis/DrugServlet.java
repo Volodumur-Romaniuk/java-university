@@ -1,12 +1,15 @@
 package com.example.pharmacy.apis;
 
 import com.example.pharmacy.CRUD.CRUDDrugs;
+import com.example.pharmacy.model.Drug;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -24,7 +27,7 @@ public class DrugServlet extends HttpServlet {
 
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest req, javax.servlet.http.HttpServletResponse response) throws ServletException, IOException {
-        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3001");
+        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         String jsonData = gson.toJson(crudDrug.getAll());
@@ -38,12 +41,54 @@ public class DrugServlet extends HttpServlet {
             searchRequest(req.getParameter("search"),response);
         }
 
+
         try (PrintWriter out = response.getWriter()) {
             out.println(jsonData);
         } catch (Exception e) {
             response.setStatus(400);
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("utf-8");
+        StringBuilder buffer = new StringBuilder();
+        BufferedReader reader = req.getReader();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            buffer.append(line);
+            buffer.append(System.lineSeparator());
+        }
+        String data = buffer.toString();
+        var res = gson.fromJson(data, Drug.class);
+
+        try {
+            var drug = crudDrug.insertDrug(res);
+            resp.setStatus(200);
+            var json = gson.toJson(drug);
+            PrintWriter out = resp.getWriter();
+            out.println(json);
+        }catch (NullPointerException e){
+            resp.setStatus(400);
+            PrintWriter out = resp.getWriter();
+            out.println(gson.toJson(new Error()));
+        }
+
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        if(req.getParameter("id") != null){
+            crudDrug.deleteById(req.getParameter("id"));
+        }
+        System.out.println("Maks i love you");
+    }
+
 
     private void searchRequest(String text, HttpServletResponse response) throws IOException {
         var list = crudDrug.searchDrug(text);

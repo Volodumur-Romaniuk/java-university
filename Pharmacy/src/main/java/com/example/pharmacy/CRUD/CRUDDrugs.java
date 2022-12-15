@@ -4,10 +4,7 @@ import com.example.pharmacy.db.Connector;
 import jakarta.validation.ValidationException;
 import com.example.pharmacy.model.Drug;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +15,18 @@ public class CRUDDrugs {
     private static final String GET_ALL_ASCEND = "SELECT * FROM " + DRUG_TABLE + " ORDER BY PRICE ASC";
     private static final String GET_ALL_DESCEND = "SELECT * FROM " + DRUG_TABLE + " ORDER BY PRICE DESC";
 
+
+    public void deleteById(String id){
+        String DELETE_BY_ID = "DELETE FROM Drugs WHERE id = ?";
+        try(Connection connection = Connector.getConnection()){
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatement.setString(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException | ValidationException e){
+            e.printStackTrace();
+        }
+        System.out.println("work-del");
+    }
     public List<Drug> getAll(){
             var drugList = new ArrayList<Drug>();
             try(Connection connection = Connector.getConnection()){
