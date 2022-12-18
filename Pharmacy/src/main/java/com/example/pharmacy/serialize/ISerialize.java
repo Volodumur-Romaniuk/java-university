@@ -13,6 +13,6 @@ public interface ISerialize<T> {
     List<T> readListObject(String fileName) throws IOException;
 
     void writeListObject(String fileName, List<T> objects) throws IOException;
-    
+
 
 }

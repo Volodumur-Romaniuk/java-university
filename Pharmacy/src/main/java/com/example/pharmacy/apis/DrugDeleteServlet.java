@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "DrugDeleteServlet", value = "/DrugDeleteServlet")
 public class DrugDeleteServlet extends HttpServlet {
     private CRUDDrugs crudDrug;
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -26,7 +27,7 @@ public class DrugDeleteServlet extends HttpServlet {
         response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
-        if(req.getParameter("id") != null){
+        if (req.getParameter("id") != null) {
             crudDrug.deleteById(req.getParameter("id"));
         }
     }
@@ -39,9 +40,8 @@ public class DrugDeleteServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("utf-8");
         super.doDelete(req, resp);
-        if(req.getParameter("id") != null){
+        if (req.getParameter("id") != null) {
             crudDrug.deleteById(req.getParameter("id"));
         }
-       System.out.println("Maks i love you");
     }
 }

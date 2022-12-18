@@ -1,6 +1,4 @@
- package com.example.pharmacy.serialize;
-
-
+package com.example.pharmacy.serialize;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,8 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class JSONOrderSerialize implements  ISerialize<Order>{
+public class JSONOrderSerialize implements ISerialize<Order> {
     private ObjectMapper mapper;
+
     public JSONOrderSerialize() {
         mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
@@ -26,7 +25,7 @@ public class JSONOrderSerialize implements  ISerialize<Order>{
 
     @Override
     public void writeObject(String fileName, Order object) throws IOException {
-        mapper.writeValue(new File(fileName),object);
+        mapper.writeValue(new File(fileName), object);
     }
 
     @Override
@@ -38,6 +37,6 @@ public class JSONOrderSerialize implements  ISerialize<Order>{
 
     @Override
     public void writeListObject(String fileName, List<Order> objects) throws IOException {
-        mapper.writeValue(new File(fileName),objects);
+        mapper.writeValue(new File(fileName), objects);
     }
 }

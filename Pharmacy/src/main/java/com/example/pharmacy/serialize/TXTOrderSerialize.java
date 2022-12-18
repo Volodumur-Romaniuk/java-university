@@ -1,4 +1,4 @@
- package com.example.pharmacy.serialize;
+package com.example.pharmacy.serialize;
 
 import com.example.pharmacy.model.Order;
 
@@ -6,8 +6,7 @@ import java.io.*;
 import java.util.List;
 
 
-
- public class TXTOrderSerialize implements ISerialize<Order> {
+public class TXTOrderSerialize implements ISerialize<Order> {
     private FileWriter fWrite;
 
     public TXTOrderSerialize() {
@@ -25,8 +24,8 @@ import java.util.List;
             line = br.readLine();
         }
         String objectLine = sb.toString();
-       return (Order) Order.class.newInstance();
-        // return  null;
+        return (Order) Order.class.newInstance();
+
     }
 
     @Override

@@ -27,18 +27,16 @@ public class DrugServlet extends HttpServlet {
 
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest req, javax.servlet.http.HttpServletResponse response) throws ServletException, IOException {
-        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-        response.setContentType("application/json");
-        response.setCharacterEncoding("utf-8");
+
         String jsonData = gson.toJson(crudDrug.getAll());
-        if(req.getParameter("ascend") != null){
-             jsonData = gson.toJson(crudDrug.getAllAscend());
+        if (req.getParameter("ascend") != null) {
+            jsonData = gson.toJson(crudDrug.getAllAscend());
         }
-        if(req.getParameter("descend") != null){
-             jsonData = gson.toJson(crudDrug.getAllDescend());
+        if (req.getParameter("descend") != null) {
+            jsonData = gson.toJson(crudDrug.getAllDescend());
         }
-        if(req.getParameter("search") != null){
-            searchRequest(req.getParameter("search"),response);
+        if (req.getParameter("search") != null) {
+            searchRequest(req.getParameter("search"), response);
         }
 
 
@@ -51,9 +49,7 @@ public class DrugServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("utf-8");
+
         StringBuilder buffer = new StringBuilder();
         BufferedReader reader = req.getReader();
         String line;
@@ -70,7 +66,7 @@ public class DrugServlet extends HttpServlet {
             var json = gson.toJson(drug);
             PrintWriter out = resp.getWriter();
             out.println(json);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             resp.setStatus(400);
             PrintWriter out = resp.getWriter();
             out.println(gson.toJson(new Error()));
@@ -78,15 +74,14 @@ public class DrugServlet extends HttpServlet {
 
     }
 
+
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
-        response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-        response.setContentType("application/json");
-        response.setCharacterEncoding("utf-8");
-        if(req.getParameter("id") != null){
+
+        if (req.getParameter("id") != null) {
             crudDrug.deleteById(req.getParameter("id"));
         }
-        System.out.println("Maks i love you");
+
     }
 
 
@@ -96,11 +91,9 @@ public class DrugServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             out.println(jsonData);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             response.setStatus(400);
-        }
-        finally {
+        } finally {
             out.close();
         }
     }
